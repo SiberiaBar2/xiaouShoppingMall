@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import 'antd/dist/antd.css'
+// React.$Http = http
+console.log('React', React)
 ReactDOM.render(
   <React.StrictMode>
     <App />
