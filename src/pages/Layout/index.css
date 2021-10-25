@@ -1,0 +1,28 @@
+.layout {
+  height: 100vh;
+}
+.layouTop {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.layouTop .lay-top-left {
+  background: #444444;
+  height: 100%;
+  text-align: center;
+  line-height: 60px;
+  font-size: 28px;
+  color: #FFFFFF;
+}
+.layouTop .lay-top-right {
+  flex: 1;
+  height: 100%;
+  background-color: skyblue;
+}
+.layouBottom {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}

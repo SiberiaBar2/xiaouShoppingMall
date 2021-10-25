@@ -1,0 +1,34 @@
+@blue: skyblue;
+@top-header:#444444;
+@white: #FFFFFF;
+
+.layout{
+  height: 100vh;
+}
+.layouTop{
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  .lay-top-left{
+    // width: 226px;
+    background: @top-header;
+    height: 100%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 28px;
+    color: @white;
+  }
+  .lay-top-right{
+    flex: 1;
+    height: 100%;
+    background-color: @blue;
+  }
+}
+
+.layouBottom{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}

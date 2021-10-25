@@ -1,16 +1,21 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { routerList } from 'constants/index'
 
 interface RouterViewProps {
-  routes?: any
+  routes?: any,
+  flag?: string
 }
 const RouterView: React.FC<RouterViewProps> = ({
-  routes
+  routes,
+  flag
 }) => {
 
+  console.log('routerList', routerList[0])
+  console.log('routes呵呵呵', routes)
   return (
     <Switch>
       {
-        routes.map((item: any, index: number) => {
+        (routes.map((item: any, index: number) => {
           if (item.component) {
             return <Route key={index} path={item.path} exact={item.exact} component={item.component} />
           } else {
@@ -19,6 +24,7 @@ const RouterView: React.FC<RouterViewProps> = ({
             </Route>
           }
         })
+        )
       }
     </Switch>
   )

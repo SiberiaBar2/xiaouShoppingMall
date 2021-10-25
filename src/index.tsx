@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from 'store/index'
+import { Provider } from 'react-redux'
 import 'antd/dist/antd.css'
-// React.$Http = http
-console.log('React', React)
+
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <Provider store={store}><App /></Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
