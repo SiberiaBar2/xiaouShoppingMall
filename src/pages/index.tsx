@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import routes from 'router/index'
 import RouterView from 'router/RouterView'
 import { Spin } from 'antd'

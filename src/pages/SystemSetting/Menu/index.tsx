@@ -6,7 +6,7 @@ const Menu: React.FC<{}> = (props) => {
     menuTree()
   }, [])
   const menuTree = async () => {
-    const res = await menuList({})
+    const res = await menuList({ params: {} })
     console.log('res- 树形结尾狗-->', res)
   }
 

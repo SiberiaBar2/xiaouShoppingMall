@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { userLogin } from 'request'
+import { customBack } from 'utils'
 import { useHistory } from "react-router-dom";
 import { initMethod } from 'store/actions'
 
@@ -15,34 +16,24 @@ interface resLogin {
 }
 
 interface loginType {
-  initMethod?: any
+  initMethod: any
 }
 
-const Login: React.FC<loginType> = ({
-  initMethod
-}) => {
+const Login: React.FC<loginType> = (props) => {
+  const { initMethod } = props
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   let history = useHistory();
-  console.log('history', history)
-  console.log('initMethod----->', initMethod)
+
   const onFinish = async (values: any) => {
-    console.log('Success:', values);
     const { username, password } = values
     let result = await userLogin({ params: { username, password } }) as resLogin
-    console.log('result---->', result)
-    if (result && result.code === 200) {
+    if (result.code === 200) {
       // 为什么加了stringify 就不报错了
-      sessionStorage.setItem('userinfo', JSON.stringify(result.list))
-      console.log('result.list', result.list)
+      sessionStorage.setItem('userinfo', customBack.stringify(result.list))
       message.success(result.msg, 1)
-      let obj = {
-        name: '哎呀',
-        eqier: '什么呢'
-      }
-      let aaa = 100
-      history.push(`/layout`, { state: aaa });
+      history.push(`/layout`);
       initMethod(result.list)
     }
   };
