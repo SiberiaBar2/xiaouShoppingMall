@@ -2,10 +2,12 @@
 import axios from 'axios'
 import { message } from 'antd';
 import { useHistory } from "react-router-dom";
-import { customBack } from 'utils'
 interface headerConfig {
   authorization?: string,
   'Content-Type': string
+}
+interface UseConfig {
+  [propname: string]: any
 }
 interface apiConfigTypes {
   method: string,
@@ -13,16 +15,7 @@ interface apiConfigTypes {
   params: any,
   path: string
 }
-interface optionKey extends apiConfigTypes {
-  url: string,
-  method: string,
-  timeout: number,
-  data: any
-}
 
-type info = {
-  token: string
-}
 
 interface OptionType {
   [propsname: string]: any
@@ -37,12 +30,6 @@ export const BaseApi = (props: apiConfigTypes) => {
   } = props
 
   let promise = new Promise((reslove, reject) => {
-    // let options: OptionType = { // 这里还可以as interface
-    //   url: path,
-    //   method,
-    //   timeout: 120000
-    // }
-
     let options = { // 这里还可以as interface
       url: path,
       method,
@@ -54,22 +41,16 @@ export const BaseApi = (props: apiConfigTypes) => {
     } else if (['post', 'put'].includes(method)) {
       options.data = params
     }
-    // let sessionInfo = sessionStorage.getItem('userinfo')
-    // console.log('sessionStorage',sessionStorage.getItem('userinfo'),typeof sessionStorage.getItem('userinfo'));
-    // if(sessionInfo){
 
-    // }
     // 请求拦截添加认证字符串
     axios.interceptors.request.use((config: any) => {
       if (config) {
-        // let value = sessionStorage.getItem('userinfo')
-        // if(sessionInfo){
-        const userInfo = customBack.parse(sessionStorage.getItem('userinfo') || '{}')
-        if (userInfo) { config.headers.authorization = userInfo && userInfo.token }
-
-        // }
-        // const userInfo = customBack.parse<string>(sessionStorage.getItem('userinfo') || '{}')
-        // config.headers.authorization = userInfo.token
+        const userInfo = sessionStorage.getItem('userinfo') || '{}'
+        console.log('JSON.parse(userInfo)', JSON.parse(userInfo));
+        const ChangeSession = JSON.parse(userInfo) as UseConfig
+        if (ChangeSession.token) { // 如果有token就添加自定义请求头，这为什么不报没有这个属性了 ?
+          config.headers.authorization = ChangeSession.token
+        }
         return config
       }
     })
